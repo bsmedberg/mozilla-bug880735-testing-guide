@@ -6,6 +6,18 @@
 <body onload="expandFullLinks()">
   <h1>Testing Site for Mozilla Bug 880735</h1>
 
+  <ol id="ToC">
+    <li><a href="#setup-blocklist">Setting Up the Blocklist</a>
+    <li><a href="#clear-permissions">Clearing Permissions After Testing</a>
+    <li><a href="#single-enabled">Single Enabled Plugin</a>
+    <li><a href="#single-cta">Single Click-To-Activate Plugin</a>
+    <li><a href="#single-disabled">Single Disabled Plugin</a>
+    <li><a href="#single-blocked">Single Hardblocked Plugin</a>
+    <li><a href="#single-outdated">Single Outdated Plugin</a>
+    <li><a href="#single-unsafe">Single Unsafe Plugin</a>
+    <li><a href="#multiple">Multiple Plugins</a>
+  </ol>
+
   <p>This site contains instructions and online resources to aid with testing
     and localization of <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=880735">Mozilla bug 880735</a>.
 
@@ -14,7 +26,7 @@
     only necessary to have the Apple Java "shim" plugin; it is not necessary to
     have Java installed.
 
-  <h3>Setting Up the Blocklist</h3>
+  <h3 id="setup-blocklist">Setting Up the Blocklist</h3>
 
   <p>Many of the scenarios below involve blocking the Java plugin in different
     ways. To do this, first set the <tt>extensions.blocklist.url</tt> pref in
@@ -23,7 +35,7 @@
 
     <pre class="code">Cc["@mozilla.org/extensions/blocklist;1"].getService(Ci.nsITimerCallback).notify(null);</pre>
 
-  <h3>Clearing Permissions After Testing</h3>
+  <h3 id="clear-permissions">Clearing Permissions After Testing</h3>
 
   <p>After testing the doorhanger, you may have unwanted site permissions left
     over in your profile. You can remove the plugin permissions from this
@@ -43,7 +55,7 @@
 
   <h2>Scenarios</h2>
 
-  <h3>Single Enabled Instance</h3>
+  <h3 id="single-enabled">Single Enabled Plugin</h3>
 
   <p>Flash is enabled by default. Users can also configure other plugins to
     run by default in the addons manager.
@@ -73,7 +85,7 @@
     <li>pluginContinue.label
   </ul>
 
-  <h3>Single Click-To-Play Plugin</h3>
+  <h3 id="single-cta">Single Click-To-Activate Plugin</h3>
 
   <p>Users can configure any plugin to not run by default but ask on every
     site. This will be the default state for all non-Flash plugins in the
@@ -99,7 +111,7 @@
     <li>pluginActivateAlways.label
   </ul>
 
-  <h3>Single Disabled Plugin</h3>
+  <h3 id="single-disabled">Single Disabled Plugin</h3>
 
   <p>Users can disable Flash or any other plugin in the addon manager. In
     this case, there is no option to enable the plugin on a per-site basis.
@@ -124,7 +136,7 @@
     <li>pluginActivateDisabled.manage</li>
   </ul>
 
-  <h3>Single Hardblocked Plugin</h3>
+  <h3 id="single-blocked">Single Hardblocked Plugin</h3>
 
   <p>If a plugin is known to be malicious or harmful, it may be "hard
     blocked". This is only used for malware and similar cases, and is not
@@ -150,7 +162,7 @@
     <li>pluginActivate.learnMore</li>
   </ul>
 
-  <h3>Single Outdated Plugin</h3>
+  <h3 id="single-outdated">Single Outdated Plugin</h3>
 
   <p>When a plugin is unsafe <em>and there is an update available</em>, the
     primary action we want users to take is to update the plugin.
@@ -185,7 +197,7 @@
     <li>pluginContinue.label</li>
   </ul>
 
-  <h3>Single Unsafe Plugin</h3>
+  <h3 id="single-unsafe">Single Unsafe Plugin</h3>
 
   <p>When a plugin is unsafe <em>and there is no update available</em>, we
     want users not to use the plugin. Unfortunately the plugin may be
@@ -221,7 +233,7 @@
     <li>pluginContinue.label</li>
   </ul>
 
-  <h3>Multiple Plugins</h3>
+  <h3 id="multiple">Multiple Plugins</h3>
 
   <p>When multiple kinds of plugins are loaded on the same page, the
     notification UI becomes more complicated, and allows users to choose the
@@ -242,7 +254,12 @@
     <li>Unsafe
   </ul>
 
-  <p>Screenshots of possible combinations:
+  <p>When clicking the in-page plugin, just the information for that plugin
+    will appear in the notification, along with a button to show all plugins:
+
+    <img src="screenshots/Both-showingFlash.png" class="block-screenshot">
+
+  <p>When clicking the notification icon itself, all plugins should be shown:
     <img src="screenshots/Both-disabled-vulnerableactive.png" class="block-screenshot" title="Flash is disabled; Java is vulnerable and user-activated">
     <img src="screenshots/Both-enabled-hardblocked.png" class="block-screenshot" title="Flash is enabled; Java is hardblocked">
 
@@ -256,6 +273,7 @@
     <li>pluginActivate.riskLabel
     <li>pluginActivateBlocked.label
     <li>pluginActivateDisabled.label
+    <li>pluginNotification.showAll.label
   </ul>
 
   <!-- end of the page -->

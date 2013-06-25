@@ -39,3 +39,15 @@ embed, object, applet {
   background: #EEE;
   margin: 0 4px;
 }
+
+#ToC {
+  float: right;
+  border: 1px solid #CCC;
+  padding: 2px;
+  font-size: smaller;
+  max-width: 15em;
+}
+
+#ToC > li {
+  display: block;
+}
