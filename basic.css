@@ -1,0 +1,44 @@
+body {
+  font-family: sans-serif;
+}
+
+tt {
+  color: #57323F;
+  font-weight: bold;
+}
+
+p {
+  margin-bottom: 1px;
+}
+
+pre.code {
+  color: #57323F;
+  border: 1px solid black;
+  padding: 5px;
+  background-color: #EEE;
+}
+
+embed, object, applet {
+  border: 3px dashed #66E;
+}
+
+.block-screenshot {
+  display: block;
+  text-align: center;
+  border: 1px solid black;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.inline-list {
+  margin: 0;
+  padding: 0;
+}
+
+.inline-list > li {
+  display: inline-block;
+  padding: 1px 4px;
+  border: 1px solid #999;
+  background: #EEE;
+  margin: 0 4px;
+}

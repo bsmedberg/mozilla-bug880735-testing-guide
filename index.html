@@ -1,0 +1,132 @@
+<head>
+  <title>Testing Site for Mozilla Bug 880735</title>
+
+  <link rel="stylesheet" type="text/css" href="basic.css">
+
+<body>
+  <h1>Testing Site for Mozilla Bug 880735</h1>
+
+  <p>This site contains instructions and online resources to aid with testing
+    and localization of <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=880735">Mozilla bug 880735</a>.
+
+  <p>In order to perform these tests, your browser should have two plugins
+    installed: Java and Flash. Your Flash should be up to date.
+
+  <h3>Setting Up the Blocklist</h3>
+
+  <p>Many of the scenarios below involve blocking the Java plugin in different
+    ways. To do this, first set the <tt>extensions.blocklist.url</tt> pref in
+    <tt>about:config</tt>. Then open the browser console and copy the following
+    script into the browser console (Control-Shift-J):
+
+    <pre class="code">Cc["@mozilla.org/extensions/blocklist;1"].getService(Ci.nsITimerCallback).notify(null);</pre>
+
+  <h3>Clearing Permissions After Testing</h3>
+
+  <p>After testing the doorhanger, you may have unwanted site permissions left
+    over in your profile. You can remove the plugin permissions from this
+    website by running the following code in the browser console:
+
+    <pre class="code">(function() {
+  let allperms = Services.perms.enumerator;
+  while (allperms.hasMoreElements()) {
+   let perm = allperms.getNext();
+   if (perm.type.startsWith('plugin') && perm.host == 'benjamin.smedbergs.us') {
+     Services.perms.remove(perm.host, perm.type);
+     console.log("Removed permission " + perm.type);
+   }
+  }
+  return "ok";
+})()</pre>
+
+  <h2>Scenarios</h2>
+
+  <h3>Single Enabled Instance</h3>
+
+  <p>Flash is enabled by default. Users can also configure other plugins to
+    run by default in the addons manager.
+
+  <ol>
+    <li>Verify in the addon manager that Flash is listed as "Always Activate".
+
+      <img src="screenshots/Flash-addonmanager-enabled.png" class="block-screenshot">
+
+    <li>Load <a href="flash-solo.html">flash-solo.html</a> in the browser.
+      The Flash game should load automatically.
+
+    <li>The plugin notification should be visible. When opened, it should inform
+      you that Flash is enabled and give you the option to disable Flash on this
+      site.
+
+      <img src="screenshots/Flash-enabled-doorhanger.png" class="block-screenshot">
+
+    <li>Choosing "Block Plugin" should make Flash be click-to-activate after
+      reload.
+  </ol>
+
+  <p>Strings:
+  <ul class="inline-list">
+    <li>pluginEnabled.message
+    <li>pluginBlockNow.label
+    <li>pluginContinue.label
+  </ul>
+
+  <h3>Single Click-To-Play Plugin</h3>
+
+  <p>Users can configure any plugin to not run by default but ask on every
+    site. This will be the default state for all non-Flash plugins in the
+    future, but that is not yet implemented.
+
+  <ol>
+    <li>Go into the addon manager and configure Flash
+      to be "Ask to Activate".
+
+    <li>Reload <a href="flash-solo.html">flash-solo.html</a> in the browser.
+      The Flash game should show a click-to-play UI in the page.
+
+    <li>Clicking on the Flash box or the notification icon should show
+      the plugin notification.
+
+      <img src="screenshots/Flash-clicktoplay.png" class="block-screenshot">
+  </ol>
+
+  <p>Strings:
+  <ul class="inline-list">
+    <li>pluginActivateNew.message
+    <li>pluginActivateNow.label
+    <li>pluginActivateAlways.label
+  </ul>
+
+  <h3>Single Disabled Plugin</h3>
+
+  <p>Users can disable Flash or any other plugin in the addon manager. In
+    this case, there is no option to enable the plugin on a per-site basis.
+
+  <ol>
+    <li>Go into the addon manager and configure Flash to be "Never Activate".
+
+    <li>Reload <a href="flash-solo.html">flash-solo.html</a> in the browser.
+      The Flash game should show a disabled UI in the page. There should also
+      be a link which opens the addons manager.
+
+    <li>Clicking on the Flash box should not show the plugin notification.
+
+    <li>Clicking on the notification icon should show the plugin notification.
+
+      <img src="screenshots/Flash-disabled.png" class="block-screenshot">
+  </ol>
+
+  <p>Strings:
+  <ul class="inline-list">
+    <li>pluginActivateDisabled.message</li>
+    <li>pluginActivateDisabled.manage</li>
+  </ul>
+
+  <h3>Single Hardblocked Plugin</h3>
+
+  <p>If a plugin is known to be malicious or harmful, it may be "hard
+    blocked". This is only used for malware and similar cases, and is not
+    used for normal plugins even if they have security issues.
+
+  <ol>
+    <li>Set the plugin blocklist to 
