@@ -3,14 +3,16 @@
 
   <link rel="stylesheet" type="text/css" href="basic.css">
 
-<body>
+<body onload="expandFullLinks()">
   <h1>Testing Site for Mozilla Bug 880735</h1>
 
   <p>This site contains instructions and online resources to aid with testing
     and localization of <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=880735">Mozilla bug 880735</a>.
 
   <p>In order to perform these tests, your browser should have two plugins
-    installed: Java and Flash. Your Flash should be up to date.
+    installed: Java and Flash. Your Flash should be up to date. On Mac, it is
+    only necessary to have the Apple Java "shim" plugin; it is not necessary to
+    have Java installed.
 
   <h3>Setting Up the Blocklist</h3>
 
@@ -129,4 +131,132 @@
     used for normal plugins even if they have security issues.
 
   <ol>
-    <li>Set the plugin blocklist to 
+    <li>Using the instructions above, set the plugin blocklist to
+      <a href="block-java-hard.xml" class="full-link">block-java-hard.xml</a>
+      and force-reload it.
+    <li>Close the dialog box that appears (restart is not necessary).
+    <li>Load <a href="java-solo.html">java-solo.html</a>.
+    <li>The plugin should be disabled.
+    <li>Clicking in the page should have no effect.
+    <li>Opening the plugin notification via the icon should not allow
+      the user to enable the plugin.
+
+      <img src="screenshots/Java-hardblocked.png" class="block-screenshot">
+  </ol>
+
+  <p>Strings:
+  <ul class="inline-list">
+    <li>pluginActivateBlocked.message</li>
+    <li>pluginActivate.learnMore</li>
+  </ul>
+
+  <h3>Single Outdated Plugin</h3>
+
+  <p>When a plugin is unsafe <em>and there is an update available</em>, the
+    primary action we want users to take is to update the plugin.
+
+  <ol>
+    <li>Using the instructions above, set the plugin blocklist to
+      <a href="block-java-outdated.xml" class="full-link">block-java-outdated.xml</a>
+      and force-reload it.
+    <li>Reload <a href="java-solo.html">java-solo.html</a>.
+    <li>The plugin should be listed as vulnerable and there should be links
+      to check for plugin updates.
+    <li>Clicking the plugin should open the plugin notification.
+      <em>Screenshot unavailable due to <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=886940">bug 886940</a>.</em>
+
+    <li>Go ahead and click "Allow Now". The plugin should start.
+    <li>Click the notification icon again. The plugin should still be listed
+      as outdated and the update link should still appear. The user has the
+      option to block the plugin.
+
+      <img src="screenshots/Java-outdated-active.png" class="block-screenshot">
+
+    <li>When finished testing, clear all permissions using the code above.
+  </ol>
+
+  <p>Strings:
+  <ul class="inline-list">
+    <li>pluginActivateBlocked.message</li>
+    <li>pluginActivateAlways.label</li>
+    <li>pluginActivateNow.label</li>
+    <li>pluginEnabledOutdated.message</li>
+    <li>pluginBlockNow.label</li>
+    <li>pluginContinue.label</li>
+  </ul>
+
+  <h3>Single Unsafe Plugin</h3>
+
+  <p>When a plugin is unsafe <em>and there is no update available</em>, we
+    want users not to use the plugin. Unfortunately the plugin may be
+    necessary, so we attempt show them the risks and ask them.
+
+  <ol>
+    <li>Using the instructions above, set the plugin blocklist to
+      <a href="block-java-vulnerable.xml" class="full-link">block-java-vulnerable.xml</a>
+      and force-reload it.
+    <li>Reload <a href="java-solo.html">java-solo.html</a>.
+    <li>The plugin should be listed as vulnerable and there should be links
+      to more information about the block.
+    <li>Clicking the plugin should open the plugin notification.
+      <img src="screenshots/Java-vulnerable.png" class="block-screenshot">
+
+    <li>Go ahead and click "Allow Now". The plugin should start.
+    <li>Click the notification icon again. The plugin should still be listed
+      as vulnerable and the details link should still appear. The user has the
+      option to block the plugin.
+
+      <img src="screenshots/Java-vulnerable-active.png" class="block-screenshot">
+
+    <li>When finished testing, clear all permissions using the code above.
+  </ol>
+
+  <p>Strings:
+  <ul class="inline-list">
+    <li>pluginActivateVulnerable.message</li>
+    <li>pluginActivateAlways.label</li>
+    <li>pluginActivateNow.label</li>
+    <li>pluginEnabledVulnerable.message</li>
+    <li>pluginBlockNow.label</li>
+    <li>pluginContinue.label</li>
+  </ul>
+
+  <h3>Multiple Plugins</h3>
+
+  <p>When multiple kinds of plugins are loaded on the same page, the
+    notification UI becomes more complicated, and allows users to choose the
+    enabled state of each plugin separately. This case is hopefully quite
+    rare.
+
+  <p>The page <a href="javaflash-together.html">javaflash-together.html</a>
+    includes both Java and Flash on a single page, for testing this UI.
+    Complete testing will require repeating the above scenarios for plugins
+    which have the following states:
+
+  <ul>
+    <li>Enabled
+    <li>Click-to-activate
+    <li>Disabled
+    <li>Hardblocked
+    <li>Outdated
+    <li>Unsafe
+  </ul>
+
+  <p>Screenshots of possible combinations:
+    <img src="screenshots/Both-disabled-vulnerableactive.png" class="block-screenshot" title="Flash is disabled; Java is vulnerable and user-activated">
+    <img src="screenshots/Both-enabled-hardblocked.png" class="block-screenshot" title="Flash is enabled; Java is hardblocked">
+
+  <p>Strings:
+  <ul class="inline-list">
+    <li>PluginActivateMultiple.message
+    <li>pluginActivate.learnMore
+    <li>pluginActivateOutdated.label
+    <li>pluginActivate.updateLabel
+    <li>pluginActivateVulnerable.label
+    <li>pluginActivate.riskLabel
+    <li>pluginActivateBlocked.label
+    <li>pluginActivateDisabled.label
+  </ul>
+
+  <!-- end of the page -->
+  <script type="text/javascript" src="index.js"></script>
