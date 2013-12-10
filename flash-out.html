@@ -1,0 +1,17 @@
+<head>
+  <title>Flash Positioned Out of the Scrollable Area</title>
+  <link rel="stylesheet" type="text/css" href="basic.css">
+
+  <style type="text/css">
+  #p {
+    position: absolute;
+    left: -4000px;
+    top: -4000px;
+  }
+  </style>
+<body>
+  <h1>Flash Positioned Out of the Scrollable Area</h1>
+
+  <p>This technique is used by the Google hangouts video plugin. See <a href="https://bugzilla.mozilla.org/show_bug.cgi?id=932832">bug 932832</a>.
+
+  <embed id="p" type="application/x-shockwave-flash" src="example3.swf" width="400" height="400"></embed>
