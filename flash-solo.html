@@ -4,4 +4,13 @@
 <body>
   <h1>Only Flash on a Page</h1>
 
-  <p><embed type="application/x-shockwave-flash" width="200" height="200" src="example3.swf"></embed>
+  <p><embed id="p" type="application/x-shockwave-flash" width="200" height="200" src="example3.swf"></embed>
+
+  <a href="javascript:(function(){var p = document.getElementById('p'); p.parentNode.removeChild(p); })()">Remove Plugin</a>
+
+  <a href="javascript:(function(){var p = document.getElementById('p'); p.width = 5; })()">Make Plugin Small</a>
+
+  <a href="javascript:(function(){var p = document.getElementById('p'); p.width = 200; })()">Make Plugin Big</a>
+
+  <p><iframe src="a.html" id="subframe"></iframe>
+    <a href="javascript:(function(){var f = document.getElementById('subframe'); f.contentWindow.location.href='b.html'})()">Navigate subframe</a>

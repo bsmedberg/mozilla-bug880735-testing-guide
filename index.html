@@ -33,7 +33,7 @@
     <tt>about:config</tt>. Then open the browser console and copy the following
     script into the browser console (Control-Shift-J):
 
-    <pre class="code">Cc["@mozilla.org/extensions/blocklist;1"].getService(Ci.nsITimerCallback).notify(null);</pre>
+    <pre class="code">Components.classes["@mozilla.org/extensions/blocklist;1"].getService(Components.interfaces.nsITimerCallback).notify(null);</pre>
 
   <h3 id="clear-permissions">Clearing Permissions After Testing</h3>
 
@@ -42,6 +42,7 @@
     website by running the following code in the browser console:
 
     <pre class="code">(function() {
+  let Services = Components.utils.import("resource://gre/modules/Services.jsm", {}).Services;
   let allperms = Services.perms.enumerator;
   while (allperms.hasMoreElements()) {
    let perm = allperms.getNext();

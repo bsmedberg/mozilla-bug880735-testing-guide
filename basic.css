@@ -19,7 +19,7 @@ pre.code {
 }
 
 embed, object, applet {
-  border: 3px dashed #66E;
+  /* border: 3px dashed #66E; */
 }
 
 .block-screenshot {

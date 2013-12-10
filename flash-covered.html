@@ -1,0 +1,30 @@
+<head>
+  <title>Flash, Covered By Other Content</title>
+  <link rel="stylesheet" type="text/css" href="basic.css">
+
+  <style type="text/css">
+  .absthing {
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    left: 20px;
+  }
+  #d1 {
+    z-index: 1;
+    padding: 10px;
+  }
+  #d2 {
+    z-index: 2;
+    border: 1px solid blue;
+    background-color: rgba(50,50,210,0.2);
+  }
+  </style>
+<body>
+  <h1>Flash, Covered By Other Content</h1>
+
+  <div class="absthing" id="d1">
+    <embed id="p" type="application/x-shockwave-flash" src="example3.swf" wmode="opaque"></embed>
+  </div>
+  <div class="absthing" id="d2">
+    <p>This overlays the plugin so you can't click on it.
+  </div>

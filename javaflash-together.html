@@ -4,9 +4,12 @@
 <body>
   <h1>Both Flash and Java on a Page</h1>
 
-  <p><embed type="application/x-shockwave-flash" width="200" height="200" src="example3.swf"></embed>
+  <p><embed id="f" type="application/x-shockwave-flash" width="200" height="200" src="example3.swf"></embed>
 
-  <p><applet width="200" height="200" code="Label1.class">
+  <p><applet width="200" height="200" code="Label1.class" id="j">
     <param name="text" value="Java is running">
   </applet>
 
+  <a href="javascript:(function(){var p = document.getElementById('f'); p.width = 5; })()">Make Flash Small</a>
+
+  <a href="javascript:(function(){var p = document.getElementById('j'); p.width = 5; })()">Make Java Small</a>

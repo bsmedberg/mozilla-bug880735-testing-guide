@@ -1,0 +1,15 @@
+<head>
+  <title>Both Flash and Java on a Page</title>
+  <link rel="stylesheet" type="text/css" href="basic.css">
+<body>
+  <h1>Both Flash and Java on a Page, Hidden</h1>
+
+  <p><embed id="f" type="application/x-shockwave-flash" width="5" height="200" src="example3.swf"></embed>
+
+  <p><applet width="5" height="200" code="Label1.class" id="j">
+    <param name="text" value="Java is running">
+  </applet>
+
+  <a href="javascript:(function(){var p = document.getElementById('f'); p.width = 200; })()">Make Flash Big</a>
+
+  <a href="javascript:(function(){var p = document.getElementById('j'); p.width = 200; })()">Make Java Big</a>
