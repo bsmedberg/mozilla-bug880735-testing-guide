@@ -1,0 +1,16 @@
+<head>
+  <title>Test for weirdness with bug N</title>
+
+<body>
+  <h1>Test for weirdness with bug N</h1>
+
+  <p>It appears that bug N added a handler to bind all plugins within a link to
+    the replacement plugin binding using the rule <tt>a .mainBox</tt>.
+
+  <p>This has the unfortunate side effect of binding any plugin element
+    that lives inside a link element, even if it is entirely unrelated to
+    the replacement feature.
+
+  <p><a href="https://youtube.com">This is a link to youtube, which also embeds a Flash element<br>
+      <object id="p" type="application/x-shockwave-flash" width="600" height="600" data="example3.swf"></object>
+  </a>

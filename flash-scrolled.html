@@ -1,0 +1,30 @@
+<head>
+  <title>Flash, scrolled down</title>
+  <link rel="stylesheet" type="text/css" href="basic.css">
+<body>
+  <h1>Flash, scrolled down</h1>
+
+  <p style="height: 100%; border: 1px solid green; padding: 10px">
+    We were/are using .getBoundingClientRect which is relative to the top left
+    of the viewport and then .elementFromPoint which is relative to the
+    window/frame. This mismatch can mark this as invisible unintentionally.
+
+  <p><a name="scrollDown" href="#" onclick="console.log(gPlugin.getBoundingClientRect()); return false;">console.log(bounding)</a></p>
+
+  <script>
+  window.location.hash = "scrollDown";
+  </script>
+
+  <p><embed id="p" type="application/x-shockwave-flash" width="200" height="200" src="example3.swf">
+
+  <script>
+  gPlugin = document.getElementById("p");
+  function checkPos() {
+    var pos = gPlugin.getBoundingClientRect();
+    var el = document.getElementAtPoint(pos.left + 1, pos.top + 1);
+    if (el !== gPlugin) {
+      console.warn("Mismatch", pos, el);
+    }
+  }
+  setInterval(20, checkPos);
+  </script>

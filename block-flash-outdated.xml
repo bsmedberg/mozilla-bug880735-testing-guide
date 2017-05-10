@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<blocklist xmlns="http://www.mozilla.org/2006/addons-blocklist" lastupdate="1336406310000">
+  <emItems>
+  </emItems>
+  <pluginItems>
+    <pluginItem blockID="p-bug880735-test-outdated">
+      <infoURL>http://benjamin.smedbergs.us/testing/</infoURL>
+      <match name="description" exp="^Shockwave.*" />
+      <versionRange severity="0" vulnerabilitystatus="0"></versionRange>
+    </pluginItem>
+  </pluginItems>
+</blocklist>

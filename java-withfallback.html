@@ -1,0 +1,12 @@
+<head>
+  <title>Only Java on a Page</title>
+  <link rel="stylesheet" type="text/css" href="basic.css">
+<body>
+  <h1>Java, with Fallback Content</h1>
+
+  <p><applet width="200" height="200" code="Label1.class">
+    <param name="text" value="Java is running">
+    <p>This is fallback content. It should be displayed when a plugin
+      is missing or disabled.
+  </applet>
+
